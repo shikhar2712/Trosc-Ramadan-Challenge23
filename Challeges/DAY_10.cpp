@@ -1,5 +1,5 @@
- #include <bits/stdc++.h> 
- using namespace std;
+#include <bits/stdc++.h>
+using namespace std;
 
 /*
 Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
@@ -16,27 +16,53 @@ Every close bracket has a corresponding open bracket of the same type.
 "[[]]("   -> false
 */
 
- bool isValid(string s) {
-        stack<char>st;
+bool isValid(string s)
+{
+  stack<char> st;
 
-       // complete the code : ) 
-   
-   
-   
+  // complete the code : )
+
+  for (char c : s)
+  {
+    if (c == '(' || c == '{' || c == '[')
+    {
+      st.push(c);
     }
+    else
+    {
+      if (st.empty())
+      {
+        return false;
+      }
+      char top = st.top();
+      st.pop();
+      if ((c == ')' && top != '(') || (c == '}' && top != '{') || (c == ']' && top != '['))
+      {
+        return false;
+      }
+    }
+  }
 
-int main(){
-string s;
-  cin >> s;
-  if (isValid(s)){
-  cout<<"Valid"<<"\n";
-  }else {
-   cout<<"Not Valid"<<"\n";
-  }  
-
-return 0;
+  return st.empty();
 }
 
+int main()
+{
+  string s;
+  cin >> s;
+  if (isValid(s))
+  {
+    cout << "Valid"
+         << "\n";
+  }
+  else
+  {
+    cout << "Not Valid"
+         << "\n";
+  }
+
+  return 0;
+}
 
 /*
 1 <= s.length <= 1e4
